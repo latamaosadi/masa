@@ -51,24 +51,26 @@ onMounted(() => {
           </button>
         </div>
       </div>
-      <div
-        class="clock relative flex items-center"
-        @click="isRailwayMode = !isRailwayMode"
-      >
-        <div class="relative">
-          <div class="absolute inset-0 opacity-10">
-            88:88
-            <span class="clock-seconds">88</span>
-          </div>
+      <div class="clock">
+        <div
+          class="relative flex items-center"
+          @click="isRailwayMode = !isRailwayMode"
+        >
           <div class="relative">
-            {{ mainClock }}
-            <span class="clock-seconds">{{ seconds }}</span>
+            <div class="absolute inset-0 opacity-10">
+              88:88
+              <span class="clock-seconds">88</span>
+            </div>
+            <div class="relative">
+              {{ mainClock }}
+              <span class="clock-seconds">{{ seconds }}</span>
+            </div>
           </div>
-        </div>
-        <div v-if="isRailwayMode" class="absolute -translate-x-full">
-          <div class="relative font-SS14C clock-railway mr-4">
-            <div class="absolute inset-0 opacity-10">~~</div>
-            <div>{{ railway }}</div>
+          <div v-if="isRailwayMode" class="absolute -translate-x-full">
+            <div class="relative font-SS14C clock-railway mr-2">
+              <div class="absolute inset-0 opacity-10">~~</div>
+              <div>{{ railway }}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -80,12 +82,15 @@ onMounted(() => {
 .clock-container {
   @apply relative;
 }
-.clock-container.landscape {
+.clock-container {
   @apply h-screen grid;
 }
 .clock-container .clock {
   font-size: 12vw;
-  @apply m-auto select-none;
+  @apply mx-auto select-none mt-24;
+}
+.clock-container.landscape .clock {
+  @apply m-auto;
 }
 .clock-container .clock-seconds {
   font-size: 6vw;
