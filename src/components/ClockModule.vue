@@ -44,7 +44,7 @@ const railway = useDateFormat(useNow(), "AA");
 
 <style scoped>
 .clock {
-  font-size: 12vw;
+  font-size: 18vw;
   @apply mx-auto select-none mt-24;
 }
 .clock-container.landscape .clock {

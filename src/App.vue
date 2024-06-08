@@ -57,7 +57,7 @@ onMounted(() => {
   @apply h-screen grid;
 }
 .clock-container .sub-module {
-  font-size: 4vw;
+  font-size: 6vw;
   @apply text-center;
 }
 </style>
