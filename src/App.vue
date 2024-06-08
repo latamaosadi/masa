@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import {
-  useDateFormat,
-  useFullscreen,
-  useNow,
-  useScreenOrientation,
-  useWakeLock,
-} from "@vueuse/core";
-import { computed, onMounted, ref } from "vue";
+import { useFullscreen, useScreenOrientation, useWakeLock } from "@vueuse/core";
+import { computed, onMounted } from "vue";
 import { clsx } from "clsx";
 import ClockScreen from "./components/ClockScreen.vue";
+import ClockModule from "./components/ClockModule.vue";
+import DateModule from "./components/DateModule.vue";
+import DayOfWeekModule from "./components/DayOfWeekModule.vue";
+import TemperatureModule from "./components/TemperatureModule.vue";
 
 const isLandscape = computed(() => orientation.value?.includes("landscape"));
-const isRailwayMode = ref(false);
 
 const containerClassnames = computed(() =>
   clsx("clock-container", {
@@ -21,17 +18,8 @@ const containerClassnames = computed(() =>
 
 const { toggle } = useFullscreen();
 
-const counter = useNow();
-const clockTimeFormat = computed(() => {
-  const separator = counter.value.getSeconds() % 2 ? ":" : " ";
-  return `${!isRailwayMode.value ? "HH" : "hh"}${separator}mm`;
-});
-
-const mainClock = useDateFormat(useNow(), clockTimeFormat);
-const seconds = useDateFormat(useNow(), "ss");
-const railway = useDateFormat(useNow(), "AA");
-const { orientation } = useScreenOrientation();
 const { request } = useWakeLock();
+const { orientation } = useScreenOrientation();
 
 onMounted(() => {
   request("screen");
@@ -51,28 +39,11 @@ onMounted(() => {
           </button>
         </div>
       </div>
-      <div class="clock">
-        <div
-          class="relative flex items-center"
-          @click="isRailwayMode = !isRailwayMode"
-        >
-          <div class="relative">
-            <div class="absolute inset-0 opacity-10">
-              88:88
-              <span class="clock-seconds">88</span>
-            </div>
-            <div class="relative">
-              {{ mainClock }}
-              <span class="clock-seconds">{{ seconds }}</span>
-            </div>
-          </div>
-          <div v-if="isRailwayMode" class="absolute -translate-x-full">
-            <div class="relative font-SS14C clock-railway mr-2">
-              <div class="absolute inset-0 opacity-10">~~</div>
-              <div>{{ railway }}</div>
-            </div>
-          </div>
-        </div>
+      <div class="grid grid-cols-3 m-auto">
+        <ClockModule class="col-span-3" />
+        <DateModule class="sub-module" />
+        <DayOfWeekModule class="sub-module font-SS14C" />
+        <TemperatureModule class="sub-module" />
       </div>
     </div>
   </ClockScreen>
@@ -80,22 +51,13 @@ onMounted(() => {
 
 <style scoped>
 .clock-container {
-  @apply relative;
+  @apply relative text-slate-800;
 }
 .clock-container {
   @apply h-screen grid;
 }
-.clock-container .clock {
-  font-size: 12vw;
-  @apply mx-auto select-none mt-24;
-}
-.clock-container.landscape .clock {
-  @apply m-auto;
-}
-.clock-container .clock-seconds {
-  font-size: 6vw;
-}
-.clock-container .clock-railway {
+.clock-container .sub-module {
   font-size: 4vw;
+  @apply text-center;
 }
 </style>

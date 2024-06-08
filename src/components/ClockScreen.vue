@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { computed, ref } from "vue";
 
 const isDimmed = ref(false);
-const { isPending, start } = useTimeoutFn(() => {
+const { isPending, start, stop } = useTimeoutFn(() => {
   isDimmed.value = true;
 }, 10 * 1000);
 
@@ -16,6 +16,7 @@ const screenContainerClassnames = computed(() =>
 
 function wakeUp() {
   isDimmed.value = false;
+  stop();
   sleepScreen();
 }
 

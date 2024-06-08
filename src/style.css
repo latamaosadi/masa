@@ -12,6 +12,11 @@
   src: url('/fonts/DSEG14Classic-Bold.ttf');
 }
 
+@font-face {
+  font-family: "DSEG Weather";
+  src: url('/fonts/DSEGWeather.ttf');
+}
+
 html {
   width: 100%;
   height: 100%;
