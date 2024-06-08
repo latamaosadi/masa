@@ -6,7 +6,7 @@ import { computed, ref } from "vue";
 const isDimmed = ref(false);
 const { isPending, start, stop } = useTimeoutFn(() => {
   isDimmed.value = true;
-}, 10 * 1000);
+}, 30 * 1000);
 
 const screenContainerClassnames = computed(() =>
   clsx("clock-screen__container", {

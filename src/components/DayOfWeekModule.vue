@@ -5,8 +5,9 @@ const dayOfWeek = useDateFormat(useNow(), "ddd");
 </script>
 
 <template>
-  <div class="clock">
+  <div class="relative font-SS14C">
     {{ dayOfWeek }}
+    <div class="absolute inset-0 opacity-10">~~~</div>
   </div>
 </template>
 

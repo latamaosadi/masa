@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useGeolocation, watchOnce } from "@vueuse/core";
 import { getWeather } from "../services/weather";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 const { coords } = useGeolocation();
 const loaded = ref(false);
@@ -13,6 +13,10 @@ watchOnce(
   (value) => {
     getCurrentWeather(value.latitude, value.longitude);
   }
+);
+
+const temperaturePlaceholder = computed(() =>
+  new Array(temperature.value.toString().length + 1).join("0")
 );
 
 async function getCurrentWeather(lat: number, lon: number) {
@@ -32,9 +36,17 @@ async function getCurrentWeather(lat: number, lon: number) {
       <div class="font-SSWeather">{{ weatherIcon }}</div>
       <div class="absolute inset-0 font-SSWeather opacity-10">0</div>
     </div>
-    <div>
-      <span class="font-SS7C">{{ temperature }}</span>
-      <span class="font-SS14C">°c</span>
+    <div class="flex">
+      <div class="relative font-SS7C">
+        <span>{{ temperature }}</span>
+        <div class="absolute inset-0 opacity-10">
+          {{ temperaturePlaceholder }}
+        </div>
+      </div>
+      <div class="relative font-SS14C">
+        <span>°c</span>
+        <div class="absolute inset-0 opacity-10">~~</div>
+      </div>
     </div>
   </div>
 </template>

@@ -42,7 +42,7 @@ onMounted(() => {
       <div class="grid grid-cols-3 m-auto">
         <ClockModule class="col-span-3" />
         <DateModule class="sub-module" />
-        <DayOfWeekModule class="sub-module font-SS14C" />
+        <DayOfWeekModule class="sub-module" />
         <TemperatureModule class="sub-module" />
       </div>
     </div>
