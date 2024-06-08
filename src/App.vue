@@ -51,7 +51,7 @@ onMounted(() => {
 
 <style scoped>
 .clock-container {
-  @apply relative text-slate-800;
+  @apply relative text-zinc-800;
 }
 .clock-container {
   @apply h-screen grid;
