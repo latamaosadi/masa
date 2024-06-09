@@ -39,7 +39,6 @@ function sleepScreen() {
   background-color: #8bac0f;
 }
 .clock-screen__container::before {
-  /* z-index: 2; */
   position: absolute;
   content: "";
   top: 0;
@@ -65,7 +64,10 @@ function sleepScreen() {
   pointer-events: none;
   @apply transition-all duration-1000;
 }
+.clock-screen__container--dimmed {
+  background-color: rgba(139, 172, 15, 0.6);
+}
 .clock-screen__container--dimmed::after {
-  background: rgba(33, 33, 33, 0.8);
+  background: rgba(0, 0, 0, 0.7);
 }
 </style>
