@@ -34,7 +34,7 @@ onMounted(() => {
           <!-- <button>
             <img src="./assets/config.svg" alt="" class="size-8" />
           </button> -->
-          <button @click="toggle">
+          <button @click="toggle" aria-label="Fullscreen">
             <img src="./assets/maximize.svg" alt="" class="size-8" />
           </button>
         </div>
