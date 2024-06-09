@@ -1,17 +1,21 @@
 <script setup lang="ts">
-import { useGeolocation, watchOnce } from "@vueuse/core";
+import { useGeolocation } from "@vueuse/core";
 import { getWeather } from "../services/weather";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 
-const { coords } = useGeolocation();
+const { coords, pause, resume } = useGeolocation();
 const loaded = ref(false);
 const weatherIcon = ref("0");
 const temperature = ref(26);
 
-watchOnce(
+watch(
   () => coords.value,
   (value) => {
     getCurrentWeather(value.latitude, value.longitude);
+    pause();
+    setTimeout(() => {
+      resume();
+    }, 10 * 1000);
   }
 );
 
@@ -24,9 +28,6 @@ async function getCurrentWeather(lat: number, lon: number) {
   weatherIcon.value = weatherResponse.icon;
   temperature.value = weatherResponse.temperature;
   loaded.value = true;
-  setTimeout(() => {
-    getCurrentWeather(lat, lon);
-  }, 5 * 1000);
 }
 </script>
 
