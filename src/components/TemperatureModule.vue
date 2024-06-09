@@ -31,7 +31,7 @@ async function getCurrentWeather(lat: number, lon: number) {
 </script>
 
 <template>
-  <div v-if="loaded" class="flex items-center gap-2">
+  <div v-if="loaded" class="flex items-center justify-center gap-2">
     <div class="relative">
       <div class="font-SSWeather">{{ weatherIcon }}</div>
       <div class="absolute inset-0 font-SSWeather opacity-10">0</div>

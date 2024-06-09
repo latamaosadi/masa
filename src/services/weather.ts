@@ -36,6 +36,6 @@ export async function getWeather(lat: number, lon: number) {
   const weather = await response.json();
   return {
     icon: weatherIcons[weather.current.weather_code as string],
-    temperature: weather.current.temperature_2m as number,
+    temperature: Math.floor(weather.current.temperature_2m as number),
   };
 }

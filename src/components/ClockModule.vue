@@ -19,23 +19,24 @@ const railway = useDateFormat(useNow(), "AA");
 <template>
   <div class="clock">
     <div
-      class="relative flex items-center"
+      class="relative flex items-center justify-center"
       @click="isRailwayMode = !isRailwayMode"
     >
-      <div class="relative">
-        <div class="absolute inset-0 opacity-10">
-          88:88
-          <span v-if="showSeconds" class="clock-seconds">88</span>
-        </div>
-        <div class="relative">
-          {{ mainClock }}
-          <span v-if="showSeconds" class="clock-seconds">{{ seconds }}</span>
-        </div>
-      </div>
-      <div v-if="isRailwayMode" class="absolute -translate-x-full">
-        <div class="relative font-SS14C clock-railway mr-2">
+      <div class="relative font-SS14C clock-railway">
+        <div v-if="isRailwayMode">
           <div class="absolute inset-0 opacity-10">~~</div>
           <div>{{ railway }}</div>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="absolute inset-0 opacity-10">
+          88:88<!--
+          --><span v-if="showSeconds" class="clock-seconds">88</span>
+        </div>
+        <div class="relative">
+          {{ mainClock
+          }}<!--
+          --><span v-if="showSeconds" class="clock-seconds">{{ seconds }}</span>
         </div>
       </div>
     </div>
@@ -54,6 +55,7 @@ const railway = useDateFormat(useNow(), "AA");
   font-size: 6vw;
 }
 .clock-railway {
+  width: 8vw;
   font-size: 4vw;
 }
 </style>
