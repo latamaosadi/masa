@@ -23,7 +23,9 @@ watch(
 
 onMounted(() => {
   if (appStore.locationRequestAccepted) {
-    resume();
+    setTimeout(() => {
+      resume();
+    }, 500);
   }
 });
 
