@@ -18,11 +18,17 @@ const containerClassnames = computed(() =>
 
 const { toggle } = useFullscreen();
 
-const { request } = useWakeLock();
+const { isSupported, request } = useWakeLock();
 const { orientation } = useScreenOrientation();
 
 onMounted(() => {
-  request("screen");
+  try {
+    if (isSupported) {
+      request("screen");
+    }
+  } catch (err: any) {
+    console.log(`${err.name}, ${err.message}`);
+  }
 });
 </script>
 
